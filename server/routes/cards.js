@@ -6,12 +6,12 @@ const Card = require('../db/models/card.js');
 router.route('/')
   .get((req, res) => {
     return Card
-      .fetchAll({ withRelated: ['assignedStatus, assignedPriority, assignee, creator'] })
+      .fetchAll({ withRelated: ['assignedStatus', 'assignedPriority', 'assignee', 'creator'] })
       .then(card => {
         return res.json(card)
       })
       .catch(err => {
-        return res.json(err);
+        return res.status(500).json({ message: err.message });
       });
   })
   .post((req, res) => {
@@ -23,7 +23,7 @@ router.route('/')
         return res.json(card)
       })
       .catch(err => {
-        return res.card(500).json({ message: err.message });
+        return res.status(500).json({ message: err.message });
       });
   });
 
@@ -32,12 +32,12 @@ router.route('/:id')
     const { id } = req.params;
     return new Card()
       .where({ id })
-      .fetch({ withRelated: ['assignedStatus, assignedPriority, assignee, creator'] })
+      .fetch({ withRelated: ['assignedStatus', 'assignedPriority', 'assignee', 'creator'] })
       .then(card => {
         return res.json(card)
       })
       .catch(err => {
-        return res.card(500).json({ message: err.message });
+        return res.status(500).json({ message: err.message });
       })
   })
   .put((req, res) => {
@@ -50,7 +50,7 @@ router.route('/:id')
         return res.json(card)
       })
       .catch(err => {
-        return res.card(500).json(err);
+        return res.status(500).json({ message: err.message });
       });
   })
   .delete((req, res) => {
@@ -61,7 +61,7 @@ router.route('/:id')
         return res.json(card);
       })
       .catch(err => {
-        return res.card(500).json(err);
+        return res.status(500).json({ message: err.message });
       });
   })
 

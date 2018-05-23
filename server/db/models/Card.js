@@ -8,14 +8,15 @@ class Card extends bookshelf.Model {
 
 
   assignedStatus() {
-    return this.hasOne('Status', 'status_id');
+    return this.belongsTo('Status', 'status_id');
   }
+
   assignedPriority() {
-    return this.hasOne('Priority', 'priority_id');
+    return this.belongsTo('Priority', 'priority_id');
   }
 
   assignee() {
-    return this.hasOne('User', 'assignee_id');
+    return this.belongsTo('User', 'assignee_id');
   }
 
   creator() {

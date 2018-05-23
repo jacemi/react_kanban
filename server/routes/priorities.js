@@ -6,7 +6,7 @@ const Priority = require('../db/models/priority.js');
 router.route('/')
   .get((req, res) => {
     return Priority
-      .fetchAll({ withRelated: ['cards'] })
+      .fetchAll({ withRelated: ['cardsWithPriority'] })
       .then(priority => {
         return res.json(priority)
       })
@@ -32,7 +32,7 @@ router.route('/:id')
     const { id } = req.params;
     return new Priority()
       .where({ id })
-      .fetch({ withRelated: ['cards'] })
+      .fetch({ withRelated: ['cardsWithPriority'] })
       .then(priority => {
         return res.json(priority)
       })

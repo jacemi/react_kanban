@@ -6,7 +6,7 @@ const Status = require('../db/models/Status.js');
 router.route('/')
   .get((req, res) => {
     return Status
-      .fetchAll({ withRelated: ['cards'] })
+      .fetchAll({ withRelated: ['cardsWithStatus'] })
       .then(status => {
         return res.json(status)
       })
@@ -32,7 +32,7 @@ router.route('/:id')
     const { id } = req.params;
     return new Status()
       .where({ id })
-      .fetch({ withRelated: ['cards'] })
+      .fetch({ withRelated: ['cardsWithStatus'] })
       .then(status => {
         return res.json(status)
       })
