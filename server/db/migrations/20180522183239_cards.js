@@ -2,7 +2,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('cards', table => {
     table.increments('id');
-    table.string('title', 50).unique().notNullable();
+    table.string('title', 100).notNullable();
     table.timestamp('created_at').defaultTo(knex.fn.now());
     table.integer('status_id').unsigned();
     table.foreign('status_id').references('id').inTable('status');
