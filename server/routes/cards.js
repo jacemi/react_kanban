@@ -15,6 +15,10 @@ router.route('/')
       });
   })
   .post((req, res) => {
+    console.log('do we get here?', req);
+    console.log('post req body', req.body);
+    console.log('post req headder', req.header);
+    console.log('req methods', req.method)
     // const { card_account } = req;
     let { title, status_id, priority_id, assignee_id, creator_id } = req.body;
     return new Card({ title, status_id, priority_id, assignee_id, creator_id })
