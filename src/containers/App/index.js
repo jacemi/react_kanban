@@ -56,16 +56,20 @@ class App extends Component {
     cardReqBody.assignee_id = cardAssignee[0].id;
     cardReqBody.creator_id = cardCreator[0].id;
     let stringifiedReqBody = JSON.stringify(cardReqBody)
-    
-
-    console.log('body to send', cardReqBody);
-    console.log('string bod', stringifiedReqBody);
-    return fetch('/cards', { method:"POST", body:stringifiedReqBody })
+  
+    return fetch('/cards', 
+    { 
+      method:"POST", 
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body:stringifiedReqBody 
+    })
     .then(res => {
       return res.json()
     })
     .then(cards => {
-      console.log('cards in post', cards);
       return this.setState({
         cards: [...cards]
       })
