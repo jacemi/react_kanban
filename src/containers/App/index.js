@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+
 import './App.css';
+import { loadCards, newCard, loadUsers, loadPriorities, loadStatuses } from '../../actions';
 import Column from '../../components/Column';
 import NewCardForm from '../NewCardForm';
 
@@ -9,12 +13,6 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      cards: [],
-      users: [],
-      priorities: [],
-      statuses: []
-    }
     this.addNewCard = this.addNewCard.bind(this);
   }
 
@@ -73,58 +71,60 @@ class App extends Component {
 
   componentDidMount() {
     console.log('lifecycle method fired')
-    fetch('/cards')
-      .then(res => {
-        return res.json()
-      })
-      .then(cards => {
-        console.log('fetch cards', cards);
-        // this.setState({ cards });
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    // fetch('/cards')
+    //   .then(res => {
+    //     return res.json()
+    //   })
+    //   .then(cards => {
+    //     console.log('fetch cards', cards);
+    //     this.props.loadCards(cards);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   })
 
-    fetch('/users')
-      .then(res => {
-        return res.json()
-      })
-      .then(users => {
-        console.log(users);
-        this.setState({ users });
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    // fetch('/users')
+    //   .then(res => {
+    //     return res.json()
+    //   })
+    //   .then(users => {
+    //     console.log(users);
+    //     this.props.loadUsers(users);
+    //     // this.setState({ users });
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   })
 
-    fetch('/priorities')
-      .then(res => {
-        return res.json()
-      })
-      .then(priorities => {
-        console.log(priorities);
-        this.setState({ priorities });
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    // fetch('/priorities')
+    //   .then(res => {
+    //     return res.json()
+    //   })
+    //   .then(priorities => {
+    //     console.log(priorities);
+    //     this.props.loadPriorities(priorities);
+    //     // this.setState({ priorities });
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   })
 
-    fetch('/statuses')
-      .then(res => {
-        return res.json()
-      })
-      .then(statuses => {
-        console.log(statuses);
-        this.setState({ statuses });
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    // fetch('/statuses')
+    //   .then(res => {
+    //     return res.json()
+    //   })
+    //   .then(statuses => {
+    //     console.log(statuses);
+    //     this.props.loadStatuses(statuses);
+    //     // this.setState({ statuses });
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   })
   }
 
 
   render() {
-    console.log("state in app", this.state);
     console.log('render fired')
     return (
       <div className="App">
@@ -133,7 +133,7 @@ class App extends Component {
         </header>
         <NewCardForm submitHandler={this.addNewCard} />
         <div className="ColumnContainer">
-          <Column cards={this.state.cards} status={1} />
+          <Column cards={this.props.cards} status={1} />
           {/* <Column cards={this.state.cards} status={2} />
           <Column cards={this.state.cards} status={3} /> */}
         </div>
@@ -142,4 +142,35 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    cards: state.cards,
+    users: state.users,
+    statuses: state.statuses,
+    priorities: state.priorities
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    loadCards: cards => {
+      dispatch(loadCards(cards));
+    },
+    newCard: card => {
+      dispatch(newCard(card));
+    },
+    loadUsers: users => {
+      dispatch(loadUsers(users));
+    },
+    loadPriorities: priorities => {
+      dispatch(loadPriorities(priorities));
+    },
+    loadStatuses: statuses => {
+      dispatch(loadStatuses(statuses));
+    }
+  }
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
