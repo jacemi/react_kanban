@@ -13,61 +13,61 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.addNewCard = this.addNewCard.bind(this);
+    // this.addNewCard = this.addNewCard.bind(this);
   }
 
-  addNewCard(card) {
+  // addNewCard(card) {
 
-    let cardReqBody = {
-      title: '',
-      status_id: null,
-      priority_id: null,
-      assignee_id: null,
-      creator_id: null
-    }
+    // let cardReqBody = {
+    //   title: '',
+    //   status_id: null,
+    //   priority_id: null,
+    //   assignee_id: null,
+    //   creator_id: null
+    // }
 
-    let { title, creator, assignee, assignedPriority, assignedStatus } = card;
+    // let { title, creator, assignee, assignedPriority, assignedStatus } = card;
 
-    let cardCreator = this.state.users.filter(user => {
-      return user.name === creator
-    });
+    // let cardCreator = this.state.users.filter(user => {
+    //   return user.name === creator
+    // });
 
-    let cardAssignee = this.state.users.filter(user => {
-      return user.name === assignee
-    });
+    // let cardAssignee = this.state.users.filter(user => {
+    //   return user.name === assignee
+    // });
 
-    let cardStatus = this.state.statuses.filter(status => {
-      return status.name === assignedStatus
-    });
+    // let cardStatus = this.state.statuses.filter(status => {
+    //   return status.name === assignedStatus
+    // });
 
-    let cardPriority = this.state.priorities.filter(priority => {
-      return priority.name === assignedPriority
-    });
-    cardReqBody.title = title;
-    cardReqBody.status_id = cardStatus[0].id;
-    cardReqBody.priority_id = cardPriority[0].id;
-    cardReqBody.assignee_id = cardAssignee[0].id;
-    cardReqBody.creator_id = cardCreator[0].id;
-    let stringifiedReqBody = JSON.stringify(cardReqBody)
+    // let cardPriority = this.state.priorities.filter(priority => {
+    //   return priority.name === assignedPriority
+    // });
+    // cardReqBody.title = title;
+    // cardReqBody.status_id = cardStatus[0].id;
+    // cardReqBody.priority_id = cardPriority[0].id;
+    // cardReqBody.assignee_id = cardAssignee[0].id;
+    // cardReqBody.creator_id = cardCreator[0].id;
+    // let stringifiedReqBody = JSON.stringify(cardReqBody)
 
-    return fetch('/cards',
-      {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: stringifiedReqBody
-      })
-      .then(res => {
-        return res.json()
-      })
-      .then(cards => {
-        return this.setState({
-          cards: [...cards]
-        })
-      })
-  }
+    // return fetch('/cards',
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: stringifiedReqBody
+    //   })
+    //   .then(res => {
+    //     return res.json()
+    //   })
+    //   .then(cards => {
+    //     return this.setState({
+    //       cards: [...cards]
+    //     })
+    //   })
+  // }
 
   componentDidMount() {
     console.log('lifecycle method fired')
@@ -121,6 +121,7 @@ class App extends Component {
     //   .catch(err => {
     //     console.log(err);
     //   })
+    this.props.loadCards();
   }
 
 
@@ -131,7 +132,7 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Kanban</h1>
         </header>
-        <NewCardForm submitHandler={this.addNewCard} />
+        <NewCardForm />
         <div className="ColumnContainer">
           <Column cards={this.props.cards} status={1} />
           {/* <Column cards={this.state.cards} status={2} />
@@ -153,20 +154,17 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadCards: cards => {
-      dispatch(loadCards(cards));
+    loadCards: () => {
+      dispatch(loadCards());
     },
-    newCard: card => {
-      dispatch(newCard(card));
+    loadUsers: () => {
+      dispatch(loadUsers());
     },
-    loadUsers: users => {
-      dispatch(loadUsers(users));
+    loadPriorities: () => {
+      dispatch(loadPriorities());
     },
-    loadPriorities: priorities => {
-      dispatch(loadPriorities(priorities));
-    },
-    loadStatuses: statuses => {
-      dispatch(loadStatuses(statuses));
+    loadStatuses: () => {
+      dispatch(loadStatuses());
     }
   }
 }

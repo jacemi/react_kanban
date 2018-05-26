@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
 
 
 class Card extends Component {
@@ -7,11 +7,11 @@ class Card extends Component {
     super(props);
     console.log(props);
     this.state = {
-      title: props.card.title,
-      creator: props.card.creator,
-      assignee: props.card.assignee,
-      assignedPriority: props.card.assignedPriority,
-      assignedStatus: props.card.assignedStatus
+      title: '',
+      creator: '',
+      assignee: '',
+      assignedPriority: '',
+      assignedStatus: ''
     }
   }
 
@@ -47,5 +47,17 @@ class Card extends Component {
 // </div>
 // );
 
+const mapStateToProps = state => {
+  return {
+    cards: state.cards,
+    users: state.users,
+    statuses: state.statuses,
+    priorities: state.priorities
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+
+
+
+
+export default connect(mapStateToProps, null)(Card);

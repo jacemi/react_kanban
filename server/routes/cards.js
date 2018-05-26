@@ -16,6 +16,7 @@ router.route('/')
   })
   .post((req, res) => {
     // const { card_account } = req;
+    console.log(req.body);
     let { title, status_id, priority_id, assignee_id, creator_id } = req.body;
     return new Card({ title, status_id, priority_id, assignee_id, creator_id })
       .save()

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { newCard, loadUsers, loadPriorities, loadStatuses } from '../../actions';
+import Option from '../../components/Option';
 
 // import { addBookToFakeXHR as addBook } from '../../lib/books.db';
 
@@ -8,10 +11,10 @@ class NewCardForm extends Component {
 
     this.state = {
       title: '',
-      creator: '',
-      assignee: '',
-      assignedPriority: '',
-      assignedStatus: ''
+      creator_id: '',
+      assignee_id: '',
+      priority_id: '',
+      status_id: 1
     }
 
     this.titleChangeHandler = this.titleChangeHandler.bind(this);
@@ -25,6 +28,9 @@ class NewCardForm extends Component {
 
   componentDidMount() {
     this.focusTextInput()
+    this.props.loadUsers();
+    this.props.loadStatuses();
+    this.props.loadPriorities();
   }
 
   focusTextInput() {
@@ -39,34 +45,37 @@ class NewCardForm extends Component {
 
   creatorChangeHandler(event) {
     const { value } = event.target;
-    this.setState({ creator: value});
+    this.setState({ creator_id: value});
   }
 
   assigneeChangeHandler(event) {
     const { value } = event.target;
-    this.setState({ assignee: value});
+    this.setState({ assignee_id: value});
   }
 
   assignedPriorityChangeHandler(event) {
     const { value } = event.target;
-    this.setState({ assignedPriority: value});
+    this.setState({ priority_id: value});
   }
 
   assignedStatusChangeHandler(event) {
     const { value } = event.target;
-    this.setState({ assignedStatus: value});
+    this.setState({ status_id: value});
   }
 
 
   handleSubmit(event) {
     event.preventDefault();
     console.log(event.target.title);
-    return this.props.submitHandler(Object.assign({}, this.state))
-    .then(() => {
-      this.setState({ title: '', creator: '', assignee: '', assignedPriority: '', assignedStatus: '' });
-      console.log('hello'); 
-    })
-
+    this.props.newCard({...this.state})
+    this.setState({ title: '', creator_id: '', assignee_id: '', priority_id: '', status_id: '' });
+    this.focusTextInput();
+    // return this.props.submitHandler(Object.assign({}, this.state))
+    // .then(() => {
+    //   this.setState({ title: '', creator: '', assignee: '', assignedPriority: '', assignedStatus: '' });
+    //   console.log('hello'); 
+    // })
+    console.log(this.props.statuses);
   }
 
   render() {
@@ -84,30 +93,24 @@ class NewCardForm extends Component {
       value={this.state.title}
       onChange={this.titleChangeHandler}
     />
-    <label htmlFor="author">Creator: </label>
-     <input 
-      type="text" 
-      id="creator" 
-      name="creator"
-      placeholder="Enter card creator"
-      value={this.state.creator}
-      onChange={this.creatorChangeHandler}
-    />
+    <label htmlFor="creator">Creator: </label>
+    <select name="creator" id="creator" onChange={this.creatorChangeHandler}>
+      <Option options={this.props.users} />
+      <option value=""></option>
+      </select>
 
     <label htmlFor="assignee">Assignee: </label>
-    <input 
-      type="text" 
-      id="assignee" 
-      name="assignee"
-      placeholder="Enter card assignee"
-      ref={input => this.textInput = input}
-      value={this.state.assignee}
-      onChange={this.assigneeChangeHandler}
-    />
-
-
+    <select name="assignee" id="assignee" onChange={this.assigneeChangeHandler}>
+      <Option options={this.props.users} />
+      <option value=""></option>
+      </select>
+    
     <label htmlFor="assignedPriority">Priority: </label>
-    <input 
+    <select name="priority" id="priority" onChange={this.assignedPriorityChangeHandler}>
+      <Option options={this.props.priorities} />
+      <option value=""></option>
+      </select>
+    {/* <input 
       type="text" 
       id="assignedPriority" 
       name="assignedPriority"
@@ -115,10 +118,14 @@ class NewCardForm extends Component {
       ref={input => this.textInput = input}
       value={this.state.assignedPriority}
       onChange={this.assignedPriorityChangeHandler}
-    />
+    /> */}
 
     <label htmlFor="assignedStatus">Status: </label>
-    <input 
+      <select name="status" id="status" onChange={this.assignedStatusChangeHandler}>
+      <Option options={this.props.statuses} />
+      </select>
+
+    {/* <input 
       type="text" 
       id="assignedStatus" 
       name="assignedStatus"
@@ -126,19 +133,49 @@ class NewCardForm extends Component {
       ref={input => this.textInput = input}
       value={this.state.assignedStatus}
       onChange={this.assignedStatusChangeHandler}
-    />
-
+    /> */}
 
 
     <button type="submit">Submit</button>
     </form>
     <div className="form debugging">
-      <span>{this.state.title}</span> <span>{this.state.creator}</span> 
-      <span>{this.state.assignee}</span><span>{this.state.assignedStatus}</span><span>{this.state.assignedPriority}</span>
+      <span>{this.state.title}</span> <span>{this.state.creator_id}</span> 
+      <span>{this.state.assignee_id}</span><span>{this.state.status_id}</span><span>{this.state.priority_id}</span>
     </div>
     </div>
     )
   }
 }
 
-export default NewCardForm;
+const mapStateToProps = state => {
+  return {
+    cards: state.cards,
+    users: state.users,
+    statuses: state.statuses,
+    priorities: state.priorities
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    newCard: card => {
+      dispatch(newCard(card));
+    },
+    loadUsers: () => {
+      dispatch(loadUsers());
+    },
+    loadPriorities: () => {
+      dispatch(loadPriorities());
+    },
+    loadStatuses: () => {
+      dispatch(loadStatuses());
+    }
+  }
+};
+
+
+
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewCardForm);

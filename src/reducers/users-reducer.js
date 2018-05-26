@@ -1,7 +1,7 @@
 
 import { LOAD_USERS } from '../actions';
 
-initialState = [];
+const initialState = [];
 
 const users = (state = initialState, action) => {
   switch(action.type) {
