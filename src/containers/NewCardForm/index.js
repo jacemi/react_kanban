@@ -96,19 +96,19 @@ class NewCardForm extends Component {
     <label htmlFor="creator">Creator: </label>
     <select name="creator" id="creator" onChange={this.creatorChangeHandler}>
       <Option options={this.props.users} />
-      <option value=""></option>
+      <option value="" selected disabled hidden>Choose here</option>
       </select>
 
     <label htmlFor="assignee">Assignee: </label>
     <select name="assignee" id="assignee" onChange={this.assigneeChangeHandler}>
       <Option options={this.props.users} />
-      <option value=""></option>
+      <option value="" selected disabled hidden>Choose here</option>
       </select>
     
     <label htmlFor="assignedPriority">Priority: </label>
     <select name="priority" id="priority" onChange={this.assignedPriorityChangeHandler}>
       <Option options={this.props.priorities} />
-      <option value=""></option>
+      <option value="" selected disabled hidden>Choose here</option>
       </select>
     {/* <input 
       type="text" 
@@ -149,7 +149,6 @@ class NewCardForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    cards: state.cards,
     users: state.users,
     statuses: state.statuses,
     priorities: state.priorities

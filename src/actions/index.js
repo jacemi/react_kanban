@@ -68,19 +68,75 @@ export const newCard = newCard => {
 //   }
 // }
 
-export const editCard = card => {
-  return {
-    type: EDIT_CARD,
-    card
+export const removeCard = card => {
+  console.log('NEW CARD ACTION', card);
+  return dispatch => {
+    return fetch(`/cards/${card.id}`,
+    {
+      method: "DELETE",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(card)
+    })
+    .then(res => {
+      return res.json()
+    })
+    .then(card => {
+      dispatch({
+        type: REMOVE_CARD,
+        card
+      })
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 }
 
-export const removeCard = card => {
-  return {
-    type: REMOVE_CARD,
-    card
+// export const editCard = card => {
+//   return {
+//     type: EDIT_CARD,
+//     card
+//   }
+// }
+
+export const editCard = card => {
+  console.log('NEW CARD ACTION', card);
+  return dispatch => {
+    return fetch(`/cards/${card.id}`,
+    {
+      method: "PUT",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(card)
+    })
+    .then(res => {
+      return res.json()
+    })
+    .then(card => {
+      dispatch({
+        type: EDIT_CARD,
+        card
+      })
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 }
+
+
+
+// export const removeCard = card => {
+//   return {
+//     type: REMOVE_CARD,
+//     card
+//   }
+// }
 
 export const LOAD_TITLE = 'LOAD_TITLE';
 

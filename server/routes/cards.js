@@ -42,7 +42,9 @@ router.route('/:id')
       })
   })
   .put((req, res) => {
+    console.log(req.body);
     const { id } = req.params;
+    console.log('id in route', id);
     let { title, status_id, priority_id, assignee_id, creator_id } = req.body;
     return new Card()
       .where({ id })

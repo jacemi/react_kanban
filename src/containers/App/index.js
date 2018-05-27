@@ -135,8 +135,8 @@ class App extends Component {
         <NewCardForm />
         <div className="ColumnContainer">
           <Column cards={this.props.cards} status={1} />
-          {/* <Column cards={this.state.cards} status={2} />
-          <Column cards={this.state.cards} status={3} /> */}
+          <Column cards={this.props.cards} status={2} />
+          <Column cards={this.props.cards} status={3} />
         </div>
       </div>
     );
