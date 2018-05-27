@@ -14,6 +14,7 @@ class App extends Component {
     super(props);
 
     // this.addNewCard = this.addNewCard.bind(this);
+    this.toggleForm = this.toggleForm.bind(this);
   }
 
   // addNewCard(card) {
@@ -124,6 +125,15 @@ class App extends Component {
     this.props.loadCards();
   }
 
+  toggleForm(){
+    let form = document.getElementsByClassName('Task-form');
+    if (form.style.display === 'none'){
+      form.style.display = 'block';
+    } else {
+      form.style.display = 'none';
+    }
+  }
+
 
   render() {
     console.log('render fired')
@@ -131,6 +141,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Kanban</h1>
+          <button onClick={this.toggleForm}>+ New Task</button>
         </header>
         <NewCardForm />
         <div className="ColumnContainer">

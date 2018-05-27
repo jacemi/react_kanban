@@ -80,7 +80,7 @@ class NewCardForm extends Component {
 
   render() {
     return(
-      <div>
+      <div className='Task-form'>
     <form onSubmit={this.handleSubmit}>
 
     <label htmlFor="title">Task: </label>
