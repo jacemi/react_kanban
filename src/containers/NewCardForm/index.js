@@ -75,7 +75,7 @@ class NewCardForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.newCard({ ...this.state });
-    this.setState({ title: '', creator_id: '', assignee_id: '', priority_id: '', status_id: '' });
+    this.setState({ title: '', creator_id: '', assignee_id: '', priority_id: '', status_id: 1 });
     this.focusTextInput();
   };
 

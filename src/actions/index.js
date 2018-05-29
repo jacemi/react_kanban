@@ -60,16 +60,15 @@ export const removeCard = card => {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(card)
+        }
       })
       .then(res => {
         return res.json()
       })
-      .then(card => {
+      .then(() => {
         dispatch({
           type: REMOVE_CARD,
-          card
+          card: { id: card.id }
         })
       })
       .catch(err => {

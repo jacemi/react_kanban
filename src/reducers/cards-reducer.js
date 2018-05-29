@@ -17,8 +17,7 @@ const cards = (state = initialState, action) => {
       const cardsToKeep = state.filter(card => {
         return card.id !== action.card.id
       })
-      return [...cardsToKeep]
-      return
+      return cardsToKeep
     default:
       return state;
   }

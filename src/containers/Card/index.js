@@ -73,7 +73,7 @@ class Card extends Component {
   moveStatusLeft(event) {
     event.preventDefault();
     if (this.state.status_id > 0) {
-      var copyState = Object.assign({}, this.state);
+      let copyState = Object.assign({}, this.state);
       copyState.status_id -= 1;
       this.setState({ status_id: copyState.status_id }, () => {
         this.props.editCard({ ...this.state });
@@ -84,7 +84,7 @@ class Card extends Component {
   moveStatusRight(event) {
     event.preventDefault();
     if (this.state.status_id < 3) {
-      var copyState = Object.assign({}, this.state);
+      let copyState = Object.assign({}, this.state);
       copyState.status_id += 1;
       this.setState({ status_id: copyState.status_id }, () => {
         this.props.editCard({ ...this.state });
@@ -201,7 +201,6 @@ class Card extends Component {
 
 const mapStateToProps = state => {
   return {
-    // cards: state.cards,
     users: state.users,
     statuses: state.statuses,
     priorities: state.priorities

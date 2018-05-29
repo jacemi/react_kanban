@@ -40,12 +40,12 @@ router.route('/:id')
       })
   })
   .put((req, res) => {
-    const { id } = req.params;
+    const id = Number(req.params.id);
     let { title, status_id, priority_id, assignee_id, creator_id } = req.body;
-    return new Card()
-      .where({ id })
+    return new Card({ id })
       .save({ title, status_id, priority_id, assignee_id, creator_id }, { method: 'update' })
       .then(card => {
+        console.log('put card', card); 
         return res.json(card)
       })
       .catch(err => {
