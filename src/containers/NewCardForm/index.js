@@ -15,7 +15,7 @@ class NewCardForm extends Component {
       priority_id: '',
       status_id: 1,
       hideForm: true
-    }
+    };
 
     this.titleChangeHandler = this.titleChangeHandler.bind(this);
     this.creatorChangeHandler = this.creatorChangeHandler.bind(this);
@@ -25,43 +25,43 @@ class NewCardForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.focusTextInput = this.focusTextInput.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
-  }
+  };
 
   componentDidMount() {
     this.focusTextInput()
     this.props.loadUsers();
     this.props.loadStatuses();
     this.props.loadPriorities();
-  }
+  };
 
   focusTextInput() {
     this.textInput.focus()
-  }
+  };
 
   titleChangeHandler(event) {
     const { value } = event.target;
     this.setState({ title: value });
-  }
+  };
 
   creatorChangeHandler(event) {
     const { value } = event.target;
     this.setState({ creator_id: value });
-  }
+  };
 
   assigneeChangeHandler(event) {
     const { value } = event.target;
     this.setState({ assignee_id: value });
-  }
+  };
 
   assignedPriorityChangeHandler(event) {
     const { value } = event.target;
     this.setState({ priority_id: value });
-  }
+  };
 
   assignedStatusChangeHandler(event) {
     const { value } = event.target;
     this.setState({ status_id: value });
-  }
+  };
 
   toggleForm() {
     if (this.state.hideForm === true) {
@@ -69,15 +69,15 @@ class NewCardForm extends Component {
     } else {
       this.setState({ hideForm: true });
     }
-  }
+  };
 
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.newCard({ ...this.state })
+    this.props.newCard({ ...this.state });
     this.setState({ title: '', creator_id: '', assignee_id: '', priority_id: '', status_id: '' });
     this.focusTextInput();
-  }
+  };
 
   render() {
     return (
@@ -123,10 +123,6 @@ class NewCardForm extends Component {
           <button type="submit">Submit</button>
         </form>
         <a id="cardFormButton" onClick={this.toggleForm}>+ New Task</a>
-        {/* <div className="form debugging">
-      <span>{this.state.title}</span> <span>{this.state.creator_id}</span> 
-      <span>{this.state.assignee_id}</span><span>{this.state.status_id}</span><span>{this.state.priority_id}</span>
-    </div> */}
       </div>
     )
   }
@@ -138,7 +134,7 @@ const mapStateToProps = state => {
     statuses: state.statuses,
     priorities: state.priorities
   }
-}
+};
 
 const mapDispatchToProps = dispatch => {
   return {

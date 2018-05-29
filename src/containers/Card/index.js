@@ -17,7 +17,7 @@ class Card extends Component {
       priority_id: this.props.card.priority_id,
       order: this.props.order,
       hideForm: true
-    }
+    };
 
     this.titleChangeHandler = this.titleChangeHandler.bind(this);
     this.creatorChangeHandler = this.creatorChangeHandler.bind(this);
@@ -29,47 +29,46 @@ class Card extends Component {
     this.moveStatusRight = this.moveStatusRight.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
-
-  }
+  };
 
   componentDidMount() {
     this.props.loadUsers();
     this.props.loadStatuses();
     this.props.loadPriorities();
-  }
+  };
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     // console.log('prevProps', prevProps);
     // console.log('prevState', prevState);
     // console.log('snapshot', snapshot); 
     // console.log('current state', this.state);
-  }
+  };
 
 
   titleChangeHandler(event) {
     const { value } = event.target;
     this.setState({ title: value });
-  }
+  };
 
   creatorChangeHandler(event) {
     const { value } = event.target;
     this.setState({ creator_id: value });
-  }
+  };
 
   assigneeChangeHandler(event) {
     const { value } = event.target;
     this.setState({ assignee_id: value });
-  }
+  };
 
   assignedPriorityChangeHandler(event) {
     const { value } = event.target;
     this.setState({ priority_id: value });
-  }
+  };
 
   assignedStatusChangeHandler(event) {
     const { value } = event.target;
     this.setState({ status_id: value });
-  }
+  };
 
   moveStatusLeft(event) {
     event.preventDefault();
@@ -78,9 +77,9 @@ class Card extends Component {
       copyState.status_id -= 1;
       this.setState({ status_id: copyState.status_id }, () => {
         this.props.editCard({ ...this.state });
-      });
+      })
     }
-  }
+  };
 
   moveStatusRight(event) {
     event.preventDefault();
@@ -89,27 +88,27 @@ class Card extends Component {
       copyState.status_id += 1;
       this.setState({ status_id: copyState.status_id }, () => {
         this.props.editCard({ ...this.state });
-      });
+      })
     }
-  }
+  };
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.editCard({ ...this.state })
-  }
+    this.props.editCard({ ...this.state });
+  };
 
   handleDelete(event) {
     event.preventDefault();
-    this.props.removeCard({ ...this.state })
-  }
+    this.props.removeCard({ ...this.state });
+  };
 
   toggleForm() {
     if (this.state.hideForm === true) {
-      this.setState({ hideForm: false })
+      this.setState({ hideForm: false });
     } else {
       this.setState({ hideForm: true });
     }
-  }
+  };
 
 
   render() {
@@ -195,24 +194,19 @@ class Card extends Component {
 
         </div>
       </div>
-    );
-
+    )
   }
-
-
-
-
-}
+};
 
 
 const mapStateToProps = state => {
   return {
-    cards: state.cards,
+    // cards: state.cards,
     users: state.users,
     statuses: state.statuses,
     priorities: state.priorities
   }
-}
+};
 
 const mapDispatchToProps = dispatch => {
   return {

@@ -15,6 +15,7 @@ class App extends Component {
 
   }
   componentDidMount() {
+    this.props.loadStatuses();
     this.props.loadCards();
   };
 
@@ -44,7 +45,7 @@ const mapStateToProps = state => {
     statuses: state.statuses,
     priorities: state.priorities
   }
-}
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -61,7 +62,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(loadStatuses());
     }
   }
-}
+};
 
 
 

@@ -6,6 +6,6 @@ const Option = ({ options }) => {
       <option value={option.id}>{option.name}</option>
     )
   })
-}
+};
 
 export default Option;
