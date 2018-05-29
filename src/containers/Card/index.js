@@ -39,6 +39,13 @@ class Card extends Component {
     this.props.loadPriorities();
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot){
+    console.log('prevProps', prevProps);
+    console.log('prevState', prevState);
+    console.log('snapshot', snapshot); 
+    console.log('current state', this.state);
+  }
+
   // focusTextInput() {
   //   this.textInput.focus()
   // }
@@ -75,9 +82,10 @@ class Card extends Component {
     if(this.state.status_id > 0){
       var copyState = Object.assign({}, this.state);
       copyState.status_id -= 1;
-      this.setState({ status_id: copyState.status_id});
-      console.log('after change', this.state);
-      this.props.editCard({...this.state});
+      this.setState({ status_id: copyState.status_id}, () => {
+        console.log('after change', this.state);
+        this.props.editCard({...this.state});
+      });
     }
   }
 
@@ -87,9 +95,11 @@ class Card extends Component {
     if(this.state.status_id < 3){
       var copyState = Object.assign({}, this.state);
       copyState.status_id += 1;
-      this.setState({ status_id: copyState.status_id});
-      console.log('after change', this.state);
-      this.props.editCard({...this.state});
+      this.setState({ status_id: copyState.status_id}, () => {
+        console.log('after change', this.state);
+        this.props.editCard({...this.state});
+
+      });
     }
   }
 
