@@ -1,22 +1,22 @@
 import React from 'react';
 import Card from '../containers/Card';
 
-const Column = ({ cards, status_id, statusName, order} ) => {
+const Column = ({ cards, status_id, statusName, order }) => {
   return (
     <div className="column">
-    <div>{statusName}</div>
-    {cards.filter(card => {
-    return(
-      card.status_id === status_id
-    )
-  })
-  .map(card => {
-    return(
-      <Card key={card.id} card={card} order={order}/>
-    )
-  })}
-  </div>
-)
+      <div>{statusName}</div>
+      {cards.filter(card => {
+        return (
+          card.status_id === status_id
+        )
+      })
+        .map(card => {
+          return (
+            <Card key={card.id} card={card} order={order} />
+          )
+        })}
+    </div>
+  )
 }
 
 export default Column;

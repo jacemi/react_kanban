@@ -27,7 +27,7 @@ class Card extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.moveStatusLeft = this.moveStatusLeft.bind(this);
     this.moveStatusRight = this.moveStatusRight.bind(this);
-    this.handleDelete = this.handleDelete.bind(this); 
+    this.handleDelete = this.handleDelete.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
 
   }
@@ -38,7 +38,7 @@ class Card extends Component {
     this.props.loadPriorities();
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot){
+  componentDidUpdate(prevProps, prevState, snapshot) {
     // console.log('prevProps', prevProps);
     // console.log('prevState', prevState);
     // console.log('snapshot', snapshot); 
@@ -48,124 +48,124 @@ class Card extends Component {
 
   titleChangeHandler(event) {
     const { value } = event.target;
-    this.setState({ title: value});
+    this.setState({ title: value });
   }
 
   creatorChangeHandler(event) {
     const { value } = event.target;
-    this.setState({ creator_id: value});
+    this.setState({ creator_id: value });
   }
 
   assigneeChangeHandler(event) {
     const { value } = event.target;
-    this.setState({ assignee_id: value});
+    this.setState({ assignee_id: value });
   }
 
   assignedPriorityChangeHandler(event) {
     const { value } = event.target;
-    this.setState({ priority_id: value});
+    this.setState({ priority_id: value });
   }
 
   assignedStatusChangeHandler(event) {
     const { value } = event.target;
-    this.setState({ status_id: value});
+    this.setState({ status_id: value });
   }
 
   moveStatusLeft(event) {
     event.preventDefault();
-    if(this.state.status_id > 0){
+    if (this.state.status_id > 0) {
       var copyState = Object.assign({}, this.state);
       copyState.status_id -= 1;
-      this.setState({ status_id: copyState.status_id}, () => {
-        this.props.editCard({...this.state});
+      this.setState({ status_id: copyState.status_id }, () => {
+        this.props.editCard({ ...this.state });
       });
     }
   }
 
   moveStatusRight(event) {
     event.preventDefault();
-    if(this.state.status_id < 3){
+    if (this.state.status_id < 3) {
       var copyState = Object.assign({}, this.state);
       copyState.status_id += 1;
-      this.setState({ status_id: copyState.status_id}, () => {
-        this.props.editCard({...this.state});
+      this.setState({ status_id: copyState.status_id }, () => {
+        this.props.editCard({ ...this.state });
       });
     }
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.editCard({...this.state})
+    this.props.editCard({ ...this.state })
   }
 
   handleDelete(event) {
     event.preventDefault();
-    this.props.removeCard({...this.state})
+    this.props.removeCard({ ...this.state })
   }
 
-  toggleForm(){
-    if (this.state.hideForm === true){
+  toggleForm() {
+    if (this.state.hideForm === true) {
       this.setState({ hideForm: false })
     } else {
-      this.setState({ hideForm: true});
+      this.setState({ hideForm: true });
     }
   }
 
 
   render() {
-    
-    return(
-      <div className="Card"> 
-      <div className={this.state.order}>
-      <form className="Form" onSubmit={this.handleSubmit}>
-        <label htmlFor="title">Task: </label>
-        <input 
-        type="text" 
-        id="cardTitle" 
-        name="title" 
-        disabled={this.state.hideForm}
-        placeholder={this.props.title} 
-        value={this.state.title}
-        onChange={this.titleChangeHandler}
-        />
 
-        <label htmlFor="creator">Assigned by: </label>
-      <select 
-      name="creator" 
-      id="cardCreator"
-      disabled={this.state.hideForm}
-      value={this.state.creator_id}
-      placeholder={this.props.creator}
-      onChange={this.creatorChangeHandler}
-      >
-      <Option options={this.props.users} />
-      </select>
+    return (
+      <div className="Card">
+        <div className={this.state.order}>
+          <form className="Form" onSubmit={this.handleSubmit}>
+            <label htmlFor="title">Task: </label>
+            <input
+              type="text"
+              id="cardTitle"
+              name="title"
+              disabled={this.state.hideForm}
+              placeholder={this.props.title}
+              value={this.state.title}
+              onChange={this.titleChangeHandler}
+            />
 
-      <label htmlFor="assignee">Assignee: </label>
-      <select 
-      name="assignee" 
-      id="cardAssignee"
-      disabled={this.state.hideForm}
-      value={this.state.assignee_id}
-      placeholder={this.props.assignee}
-      onChange={this.assigneeChangeHandler}
-      >
-      <Option options={this.props.users} />
-      </select>
+            <label htmlFor="creator">Assigned by: </label>
+            <select
+              name="creator"
+              id="cardCreator"
+              disabled={this.state.hideForm}
+              value={this.state.creator_id}
+              placeholder={this.props.creator}
+              onChange={this.creatorChangeHandler}
+            >
+              <Option options={this.props.users} />
+            </select>
 
-      <label htmlFor="assignedPriority">Priority: </label>
-      <select 
-      name="priority" 
-      id="cardPriority"
-      disabled={this.state.hideForm}
-      value={this.state.priority_id}
-      placeholder={this.props.priority_id}
-      onChange={this.assignedPriorityChangeHandler}
-      >
-      <Option options={this.props.priorities} />
-      </select>
+            <label htmlFor="assignee">Assignee: </label>
+            <select
+              name="assignee"
+              id="cardAssignee"
+              disabled={this.state.hideForm}
+              value={this.state.assignee_id}
+              placeholder={this.props.assignee}
+              onChange={this.assigneeChangeHandler}
+            >
+              <Option options={this.props.users} />
+            </select>
 
-      {/* <label htmlFor="assignedStatus">Status: </label>
+            <label htmlFor="assignedPriority">Priority: </label>
+            <select
+              name="priority"
+              id="cardPriority"
+              disabled={this.state.hideForm}
+              value={this.state.priority_id}
+              placeholder={this.props.priority_id}
+              onChange={this.assignedPriorityChangeHandler}
+            >
+              <Option options={this.props.priorities} />
+            </select>
+
+            {/* <label htmlFor="assignedStatus">Status: </label>
       <select 
       name="status" 
       id="cardStatus"
@@ -177,24 +177,24 @@ class Card extends Component {
       <Option options={this.props.statuses} />
       </select> */}
 
-      <button 
-      type="submit" 
-      disabled={this.state.hideForm}
-      >
-      Submit
+            <button
+              type="submit"
+              disabled={this.state.hideForm}
+            >
+              Submit
       </button>
-      </form>
+          </form>
 
-      <button onClick={this.handleDelete} hidden={this.state.hideForm}>Delete</button>
+          <button onClick={this.handleDelete} hidden={this.state.hideForm}>Delete</button>
 
-      <button onClick={this.toggleForm} hidden={!this.state.hideForm}>Edit</button>
+          <button onClick={this.toggleForm} hidden={!this.state.hideForm}>Edit</button>
 
-      <button onClick={this.moveStatusRight}> Right </button>
+          <button onClick={this.moveStatusRight}> Right </button>
 
-      <button onClick={this.moveStatusLeft}> Left </button>
-    
-    </div>
-    </div>
+          <button onClick={this.moveStatusLeft}> Left </button>
+
+        </div>
+      </div>
     );
 
   }

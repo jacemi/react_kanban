@@ -14,7 +14,7 @@ class App extends Component {
     super(props);
 
   }
-  componentDidMount(){
+  componentDidMount() {
     this.props.loadCards();
   };
 
@@ -28,7 +28,7 @@ class App extends Component {
         </header>
         <NewCardForm />
         <div className="ColumnContainer">
-          <Column cards={this.props.cards} statusName="In Queue" status_id={1}order={"Column-1"}/>
+          <Column cards={this.props.cards} statusName="In Queue" status_id={1} order={"Column-1"} />
           <Column cards={this.props.cards} statusName="In Progress" status_id={2} order={"Column-2"} />
           <Column cards={this.props.cards} statusName="Done" status_id={3} order={"Column-3"} />
         </div>
