@@ -15,7 +15,6 @@ router.route('/')
       });
   })
   .post((req, res) => {
-    // const { status_account } = req;
     let { name } = req.body;
     return new Status({ name })
       .save()

@@ -13,7 +13,6 @@ export const loadCards = () => {
       return res.json()
     })
     .then(cards => {
-      console.log('fetch cards', cards);
       dispatch({
         type: LOAD_CARDS,
         cards
@@ -26,15 +25,7 @@ export const loadCards = () => {
 
 }
 
-// export const loadCards = cards => {
-//   return {
-//     type: LOAD_CARDS,
-//     cards
-//   }
-// }
-
 export const newCard = newCard => {
-  console.log('NEW CARD ACTION', newCard);
   return dispatch => {
     return fetch('/cards',
     {
@@ -61,15 +52,7 @@ export const newCard = newCard => {
 }
 
 
-// export const newCard = card => {
-//   return {
-//     type: NEW_CARD,
-//     card
-//   }
-// }
-
 export const removeCard = card => {
-  console.log('NEW CARD ACTION', card);
   return dispatch => {
     return fetch(`/cards/${card.id}`,
     {
@@ -95,15 +78,8 @@ export const removeCard = card => {
   }
 }
 
-// export const editCard = card => {
-//   return {
-//     type: EDIT_CARD,
-//     card
-//   }
-// }
 
 export const editCard = card => {
-  console.log('NEW CARD ACTION', card);
   return dispatch => {
     return fetch(`/cards/${card.id}`,
     {
@@ -130,104 +106,6 @@ export const editCard = card => {
 }
 
 
-
-// export const removeCard = card => {
-//   return {
-//     type: REMOVE_CARD,
-//     card
-//   }
-// }
-
-export const LOAD_TITLE = 'LOAD_TITLE';
-
-export const EDIT_TITLE = 'EDIT_TITLE';
-
-export const LOAD_CREATOR = 'LOAD_CREATOR';
-
-export const EDIT_CREATOR = 'EDIT_CREATOR';
-
-export const LOAD_ASSIGNEE = 'LOAD_ASSIGNEE';
-
-export const EDIT_ASSIGNEE = 'EDIT_ASSIGNEE';
-
-export const EDIT_PRIORITY = 'EDIT_PRIORITY';
-
-export const LOAD_PRIORITY = 'LOAD_PRIORITY';
-
-export const LOAD_STATUS = 'LOAD_STATUS';
-
-export const EDIT_STATUS = 'EDIT_STATUS';
-
-export const loadTitle = title => {
-  return {
-    type: LOAD_TITLE,
-    title
-  }
-}
-
-export const editTitle = title => {
-  return {
-    type: EDIT_TITLE,
-    title
-  }
-}
-
-export const loadCreator = creator => {
-  return {
-    type: LOAD_CREATOR,
-    creator
-  }
-}
-
-export const editCreator = creator => {
-  return {
-    type: EDIT_CREATOR,
-    creator
-  }
-}
-
-export const loadAssignee = assignee => {
-  return {
-    type: LOAD_ASSIGNEE,
-    assignee
-  }
-}
-
-export const editAssignee = assignee => {
-  return {
-    type: EDIT_ASSIGNEE,
-    assignee
-  }
-}
-
-export const loadPriority = priority => {
-  return {
-    type: LOAD_PRIORITY,
-    priority
-  }
-}
-
-export const editPriority = priority => {
-  return {
-    type: EDIT_PRIORITY,
-    priority
-  }
-}
-
-export const loadStatus = status => {
-  return {
-    type: LOAD_STATUS,
-    status
-  }
-}
-
-export const editStatus = status => {
-  return {
-    type: EDIT_STATUS,
-    status
-  }
-}
-
 export const LOAD_USERS = 'LOAD_USERS';
 
 
@@ -249,13 +127,6 @@ export const loadUsers = () => {
 }
 }
 
-
-// export const loadUsers = users => {
-//   return {
-//     type: LOAD_USERS,
-//     users
-//   }
-// }
 
 export const LOAD_PRIORITIES = 'LOAD_PRIORITIES';
 
@@ -279,15 +150,6 @@ export const loadPriorities = () => {
 }
 
 
-
-
-// export const loadPriorities = priorities => {
-//   return {
-//     type: LOAD_PRIORITIES,
-//     priorities
-//   }
-// }
-
 export const LOAD_STATUSES = 'LOAD_STATUSES';
 
 export const loadStatuses = () => {
@@ -308,13 +170,6 @@ export const loadStatuses = () => {
 }
 }
 
-
-// export const loadStatuses = statuses => {
-//   return {
-//     type: LOAD_STATUSES,
-//     statuses
-//   }
-// }
 
 
 

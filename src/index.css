@@ -24,7 +24,20 @@ body {
 
 .Card {
   width: 100%;
-  background-color: lightcoral;
+  padding: 3px;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+}
+
+.Card input:hidden{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.Card select:disabled {
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 
@@ -34,6 +47,30 @@ body {
   justify-content: space-around;
 }
 
-.Task-form {
-  display: none;
+.column {
+  width: 33%;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+
+}
+
+.Column-1{
+  background-color: lightcoral;
+
+}
+
+.Column-2{
+  background-color: lightgreen;
+
+
+}
+
+.Column-3{
+  background-color: lightblue;
+
+
 }

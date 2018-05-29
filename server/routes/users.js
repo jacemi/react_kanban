@@ -15,7 +15,6 @@ router.route('/')
       });
   })
   .post((req, res) => {
-    // const { user_account } = req;
     let { name } = req.body;
     return new User({ name })
       .save()

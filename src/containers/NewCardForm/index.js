@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { newCard, loadUsers, loadPriorities, loadStatuses } from '../../actions';
 import Option from '../../components/Option';
 
-// import { addBookToFakeXHR as addBook } from '../../lib/books.db';
 
 class NewCardForm extends Component {
   constructor(props) {
@@ -14,7 +13,8 @@ class NewCardForm extends Component {
       creator_id: '',
       assignee_id: '',
       priority_id: '',
-      status_id: 1
+      status_id: 1,
+      hideForm: true
     }
 
     this.titleChangeHandler = this.titleChangeHandler.bind(this);
@@ -24,6 +24,7 @@ class NewCardForm extends Component {
     this.assignedStatusChangeHandler = this.assignedStatusChangeHandler.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.focusTextInput = this.focusTextInput.bind(this); 
+    this.toggleForm = this.toggleForm.bind(this);
   }
 
   componentDidMount() {
@@ -39,7 +40,6 @@ class NewCardForm extends Component {
 
   titleChangeHandler(event) {
     const { value } = event.target;
-    console.log('submitted title value', value);
     this.setState({ title: value});
   }
 
@@ -63,25 +63,26 @@ class NewCardForm extends Component {
     this.setState({ status_id: value});
   }
 
+  toggleForm(){
+    if (this.state.hideForm === true){
+      this.setState({ hideForm: false })
+    } else {
+      this.setState({ hideForm: true});
+    }
+  }
+
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(event.target.title);
     this.props.newCard({...this.state})
     this.setState({ title: '', creator_id: '', assignee_id: '', priority_id: '', status_id: '' });
     this.focusTextInput();
-    // return this.props.submitHandler(Object.assign({}, this.state))
-    // .then(() => {
-    //   this.setState({ title: '', creator: '', assignee: '', assignedPriority: '', assignedStatus: '' });
-    //   console.log('hello'); 
-    // })
-    console.log(this.props.statuses);
   }
 
   render() {
     return(
       <div className='Task-form'>
-    <form onSubmit={this.handleSubmit}>
+    <form onSubmit={this.handleSubmit} hidden={this.state.hideForm}>
 
     <label htmlFor="title">Task: </label>
     <input 
@@ -110,38 +111,22 @@ class NewCardForm extends Component {
       <Option options={this.props.priorities} />
       <option value="" selected disabled hidden>Choose here</option>
       </select>
-    {/* <input 
-      type="text" 
-      id="assignedPriority" 
-      name="assignedPriority"
-      placeholder="Enter card priority"
-      ref={input => this.textInput = input}
-      value={this.state.assignedPriority}
-      onChange={this.assignedPriorityChangeHandler}
-    /> */}
+
 
     <label htmlFor="assignedStatus">Status: </label>
       <select name="status" id="status" onChange={this.assignedStatusChangeHandler}>
       <Option options={this.props.statuses} />
       </select>
 
-    {/* <input 
-      type="text" 
-      id="assignedStatus" 
-      name="assignedStatus"
-      placeholder="Enter card status"
-      ref={input => this.textInput = input}
-      value={this.state.assignedStatus}
-      onChange={this.assignedStatusChangeHandler}
-    /> */}
 
 
     <button type="submit">Submit</button>
     </form>
-    <div className="form debugging">
+    <a id="cardFormButton" onClick={this.toggleForm}>+ New Task</a>
+    {/* <div className="form debugging">
       <span>{this.state.title}</span> <span>{this.state.creator_id}</span> 
       <span>{this.state.assignee_id}</span><span>{this.state.status_id}</span><span>{this.state.priority_id}</span>
-    </div>
+    </div> */}
     </div>
     )
   }

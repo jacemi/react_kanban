@@ -15,7 +15,6 @@ router.route('/')
       });
   })
   .post((req, res) => {
-    // const { priority_account } = req;
     let { name } = req.body;
     return new Priority({ name })
       .save()

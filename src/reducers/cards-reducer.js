@@ -10,7 +10,6 @@ const cards = (state = initialState, action) => {
     return [...state, action.card];
     case(EDIT_CARD):
     const unchangedCards = state.filter(card => {
-      console.log(card);
       return card.id !== action.card.id
     })
     return [...unchangedCards, action.card]
