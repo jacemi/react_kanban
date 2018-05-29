@@ -2,7 +2,9 @@ import React from 'react';
 import Card from '../containers/Card';
 
 const Column = ({ cards, status} ) => {
-  return cards.filter(card => {
+  return (
+    <div className="column">
+    {cards.filter(card => {
     return(
       card.status_id === status
     )
@@ -10,11 +12,11 @@ const Column = ({ cards, status} ) => {
   .map(card => {
     console.log('column card', card);
     return(
-      <div className='column'>
       <Card key={card.id} card={card} />
-      </div>
     )
-  })
+  })}
+  </div>
+)
 }
 
 export default Column;
